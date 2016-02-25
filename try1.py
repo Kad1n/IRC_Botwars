@@ -11,7 +11,7 @@ realname = 'lololol'
 read = ''
 
 irc_sock = socket.socket()
-irc_sock.connect(tuple('irc.snoonet.org'))
+irc_sock.connect(("irc.snoonet.org", port))
 irc_sock.send('NICK ' + nick + '\r\n')
 irc_sock.send('USER ' + ident + '' + host + 'bla: ' + realname + 'n')
 
