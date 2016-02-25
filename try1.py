@@ -15,5 +15,6 @@ irc_sock.connect(("irc.snoonet.org", port))
 irc_sock.send('NICK ' + nick + '\r\n')
 irc_sock.send('USER ' + ident + '' + host + 'bla: ' + realname + 'n')
 
+#testing!!!!
 
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
