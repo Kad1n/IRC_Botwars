@@ -5,8 +5,8 @@ class MyBot(IRCBot):
     def on_message(self, message, nickname, channel, is_query):
         if is_query:
             self.send(nickname, "You said: " + message)
-        else:
-            self.send(channel, nickname + " said: " + message)
+        elif message == "!penis":
+            self.send(channel, nickname + " wanted the " + "penis command")
 
     def on_join(self, nickname, channel):
         if nickname != self.nickname:
