@@ -10,11 +10,14 @@ class MyBot(IRCBot):
         elif message == "!hestepikk":
             self.send(channel, nickname + ": " + "hestepikk command")
         elif message == "!approves":
-            if nickname == "kad" or "R0flcopt3r" or "moggy":
+            if nickname == "kad" or "0flcopt3r" or "moggy":
                 self.send(channel, nickname + ": " + "kad-server.net/" +
                           nickname + "approves")
-            else:
+            elif nickname != "kad" or "0flcopt3r" or "moggy":
                 self.send(channel, nickname + "kad-server.net/approves")
+        elif message == "!lies":
+            self.send(channel, nickname +
+                      ": " + "https://www.youtube.com/watch?v=YWdD206eSv0")
 
     def on_join(self, nickname, channel):
         if nickname != self.nickname:
