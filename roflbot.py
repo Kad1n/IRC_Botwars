@@ -9,8 +9,9 @@ class MyBot(IRCBot):
             self.send(channel, nickname + ": " + "penis command")
         elif message == "!hestepikk":
             self.send(channel, nickname + ": " + "hestepikk command")
-        elif message == "!approves":
-            if nickname == "r0flcopt3r" or nickname == "kad" or nickname == "moggy":
+        elif message == "!approve":
+            if nickname == "r0flcopt3r" or nickname == "kad" or \
+                    nickname == "moggy":
                 self.send(channel, nickname + ": " + "kad-server.net/" +
                           nickname + "approves")
             else:
