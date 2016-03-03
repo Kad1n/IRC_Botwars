@@ -1,5 +1,9 @@
 from pyrcb import IRCBot
 
+noice = "https://www.youtube.com/watch?v=a8c5wmeOL9o&ab_channel=Dylancliff111"
+stallman = "https://www.youtube.com/watch?v=Dn8gealMDsg&ab_channel=Skirmant"
+unnaccept = "http://www.myinstants.com/media/sounds/lemon-grab-unacceptable.mp3"
+
 
 class MyBot(IRCBot):
     def on_message(self, message, nickname, channel, is_query):
@@ -20,16 +24,16 @@ class MyBot(IRCBot):
                       ": " + "http://cristgaming.com/pirate.swf")
         elif message == "!noice":
             self.send(channel, nickname +
-                      ": " + "https://www.youtube.com/watch?v=a8c5wmeOL9o&ab_channel=Dylancliff111")
-        elif message == "!stallman":
+                      ": " + noice)
+        elif message == "stallman":
             self.send(channel, nickname +
-                      ": " + "https://www.youtube.com/watch?v=Dn8gealMDsg&ab_channel=Skirmant")
+                      ": " + stallman)
         elif message == "!offandon":
             self.send(channel, nickname +
                       ": " + "http://www.myinstants.com/media/sounds/it.mp3")
         elif message == "!406":
             self.send(channel, nickname +
-                      ": " + "http://www.myinstants.com/media/sounds/lemon-grab-unacceptable.mp3")
+                      ": " + unnaccept)
 
     def on_join(self, nickname, channel):
         if nickname != self.nickname:
