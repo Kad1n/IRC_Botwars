@@ -15,6 +15,21 @@ class MyBot(IRCBot):
         elif message == "!lies":
             self.send(channel, nickname +
                       ": " + "https://www.youtube.com/watch?v=YWdD206eSv0")
+        elif message == "!pirate":
+            self.send(channel, nickname +
+                      ": " + "http://cristgaming.com/pirate.swf")
+        elif message == "!noice":
+            self.send(channel, nickname +
+                      ": " + "https://www.youtube.com/watch?v=a8c5wmeOL9o&ab_channel=Dylancliff111")
+        elif message == "!stallman":
+            self.send(channel, nickname +
+                      ": " + "https://www.youtube.com/watch?v=Dn8gealMDsg&ab_channel=Skirmant")
+        elif message == "!offandon":
+            self.send(channel, nickname +
+                      ": " + "http://www.myinstants.com/media/sounds/it.mp3")
+        elif message == "!406":
+            self.send(channel, nickname +
+                      ": " + "http://www.myinstants.com/media/sounds/lemon-grab-unacceptable.mp3")
 
     def on_join(self, nickname, channel):
         if nickname != self.nickname:
