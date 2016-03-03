@@ -25,7 +25,7 @@ class MyBot(IRCBot):
         elif message == "!noice":
             self.send(channel, nickname +
                       ": " + noice)
-        elif message == "stallman":
+        elif message == "!stallman":
             self.send(channel, nickname +
                       ": " + stallman)
         elif message == "!offandon":
