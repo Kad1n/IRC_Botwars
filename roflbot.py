@@ -5,10 +5,6 @@ class MyBot(IRCBot):
     def on_message(self, message, nickname, channel, is_query):
         if is_query:
             self.send(nickname, "You said: " + message)
-        elif message == "!penis":
-            self.send(channel, nickname + ": " + "penis command")
-        elif message == "!hestepikk":
-            self.send(channel, nickname + ": " + "hestepikk command")
         elif message == "!approve":
             if nickname == "r0flcopt3r" or nickname == "kad" or \
                     nickname == "moggy":
