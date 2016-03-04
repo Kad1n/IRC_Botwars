@@ -1,14 +1,18 @@
 from pyrcb import IRCBot
 import sqlite3
 
+# Making some variables to shorten things down, and what db to use
 conn = sqlite3.connect('rolfbot.db')
-
-noice = "https://www.youtube.com/watch?v=a8c5wmeOL9o&ab_channel=Dylancliff111"
-stallman = "https://www.youtube.com/watch?v=Dn8gealMDsg&ab_channel=Skirmant"
-unnaccept = "http://www.myinstants.com/media/sounds/lemon-grab-unacceptable.mp3"
 c = conn.cursor()
 
 
+# Just some variables to shorten down some commands, somewhat temporary
+noice = "https://www.youtube.com/watch?v=a8c5wmeOL9o&ab_channel=Dylancliff111"
+stallman = "https://www.youtube.com/watch?v=Dn8gealMDsg&ab_channel=Skirmant"
+unnaccept = "http://www.myinstants.com/media/sounds/lemon-grab-unacceptable.mp3"
+
+
+# This is the bot, and all it's commands and functions
 class MyBot(IRCBot):
     def on_message(self, message, nickname, channel, is_query):
         if is_query:
@@ -39,16 +43,18 @@ class MyBot(IRCBot):
             self.send(channel, nickname +
                       ": " + unnaccept)
 
-    def on_join(self, nickname, channel):
-        if nickname != self.nickname:
-            self.send(channel, nickname + " has joined " + channel)
-
+    # Making a function for storing quotes
     def quote():
+        # creates the table if it doesn't already exsist
         c.execute('''CREATE TABLE IF NOT EXISITS quote
                   (nickname text, message text, number INTEGER)''')
+
+        # Grabbing command, and stores it in the database
         if message == "!quote":
             c.execute("INSERT INTO quote VALUES(nickname, message)")
 
+
+# Main fucntion
 def main():
     bot = MyBot()
     bot.connect("irc.snoonet.org", 6667)
@@ -57,5 +63,6 @@ def main():
     bot.listen()
 
 
+# Start main function
 if __name__ == "__main__":
     main()
