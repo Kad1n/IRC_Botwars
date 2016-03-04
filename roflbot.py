@@ -11,6 +11,10 @@ noice = "https://www.youtube.com/watch?v=a8c5wmeOL9o&ab_channel=Dylancliff111"
 stallman = "https://www.youtube.com/watch?v=Dn8gealMDsg&ab_channel=Skirmant"
 unnaccept = "http://www.myinstants.com/media/sounds/lemon-grab-unacceptable.mp3"
 
+# Just to test
+nickname = "none"
+message = "none"
+
 
 # This is the bot, and all it's commands and functions
 class MyBot(IRCBot):
@@ -43,15 +47,16 @@ class MyBot(IRCBot):
             self.send(channel, nickname +
                       ": " + unnaccept)
 
-    # Making a function for storing quotes
-    def quote():
-        # creates the table if it doesn't already exsist
-        c.execute('''CREATE TABLE IF NOT EXISITS quote
-                  (nickname text, message text, number INTEGER)''')
+        # Making a function for storing quotes
+        def quote():
+            # creates the table if it doesn't already exsist
+            c.execute('''CREATE TABLE IF NOT EXISTS quote
+                    (nickname text, message text, number INTEGER)''')
 
-        # Grabbing command, and stores it in the database
-        if message == "!quote":
-            c.execute("INSERT INTO quote VALUES(nickname, message)")
+            # Grabbing command, and stores it in the database
+            if message == "!quote":
+                c.execute("INSERT INTO quote VALUES(?, ?)", nickname, message)
+        quote()
 
 
 # Main fucntion
