@@ -1,8 +1,12 @@
 from pyrcb import IRCBot
+import sqlite3
+
+conn = sqlite3.connect('rolfbot.db')
 
 noice = "https://www.youtube.com/watch?v=a8c5wmeOL9o&ab_channel=Dylancliff111"
 stallman = "https://www.youtube.com/watch?v=Dn8gealMDsg&ab_channel=Skirmant"
 unnaccept = "http://www.myinstants.com/media/sounds/lemon-grab-unacceptable.mp3"
+c = conn.cursor()
 
 
 class MyBot(IRCBot):
@@ -39,6 +43,11 @@ class MyBot(IRCBot):
         if nickname != self.nickname:
             self.send(channel, nickname + " has joined " + channel)
 
+    def quote():
+        c.execute('''CREATE TABLE IF NOT EXISITS quote
+                  (nickname text, message text, number INTEGER)''')
+        if message == "!quote":
+            c.execute("INSERT INTO quote VALUES(nickname, message)")
 
 def main():
     bot = MyBot()
