@@ -1,73 +1,46 @@
 from pyrcb import IRCBot
-import sqlite3
+import simplejson as json
 
-# Making some variables to shorten things down, and what db to use
-conn = sqlite3.connect('rolfbot.db')
-c = conn.cursor()
-
-
-# Just some variables to shorten down some commands, somewhat temporary
-noice = "https://www.youtube.com/watch?v=a8c5wmeOL9o&ab_channel=Dylancliff111"
-stallman = "https://www.youtube.com/watch?v=Dn8gealMDsg&ab_channel=Skirmant"
-unnaccept = "http://www.myinstants.com/media/sounds/lemon-grab-unacceptable.mp3"
-
-# Just to test
-nickname = "none"
-message = "none"
-
-
-# This is the bot, and all it's commands and functions
-class MyBot(IRCBot):
-    def on_message(self, message, nickname, channel, is_query):
-        if is_query:
-            self.send(nickname, "You said: " + message)
-        elif message == "!approve":
-            if nickname == "r0flcopt3r" or nickname == "kad" or \
-                    nickname == "moggy":
-                self.send(channel, nickname + ": " + "kad-server.net/" +
-                          nickname + "approves")
-            else:
-                self.send(channel, nickname + "kad-server.net/approves")
-        elif message == "!lies":
-            self.send(channel, nickname +
-                      ": " + "https://www.youtube.com/watch?v=YWdD206eSv0")
-        elif message == "!pirate":
-            self.send(channel, nickname +
-                      ": " + "http://cristgaming.com/pirate.swf")
-        elif message == "!noice":
-            self.send(channel, nickname +
-                      ": " + noice)
-        elif message == "!stallman":
-            self.send(channel, nickname +
-                      ": " + stallman)
-        elif message == "!offandon":
-            self.send(channel, nickname +
-                      ": " + "http://www.myinstants.com/media/sounds/it.mp3")
-        elif message == "!406":
-            self.send(channel, nickname +
-                      ": " + unnaccept)
-
-        # Making a function for storing quotes
-        def quote():
-            # creates the table if it doesn't already exsist
-            c.execute('''CREATE TABLE IF NOT EXISTS quote
-                    (nickname text, message text, number INTEGER)''')
-
-            # Grabbing command, and stores it in the database
-            if message == "!quote":
-                c.execute("INSERT INTO quote VALUES(?, ?)", nickname, message)
-        quote()
+IRC_network 	= "irc.snoonet.org"
+IRC_port 	= 6667
+IRC_channel	= "#deitrebukkenenoobs-dev"
+bot_name 	= "Kadbot"
+commands_path	= "/home/kad/Projects/IRC_Botwars/commands.json"
 
 
 # Main fucntion
 def main():
     bot = MyBot()
-    bot.connect("irc.snoonet.org", 6667)
-    bot.register("Roflbot")
-    bot.join("#dei3bukkenenoobs")
+    bot.connect(IRC_network, IRC_port)
+    bot.register(bot_name)
+    bot.join(IRC_channel)
     bot.listen()
 
+# This is the bot, and all it's commands and functions
+class MyBot(IRCBot):
+
+	def private_msg(self, nickname, message):
+		self.send(nickname, message)
+
+	def public_msg(self, message):
+		self.send(IRC_channel, message)
+
+	def on_message(self, message, nickname, channel, is_query):
+		print(message)
+        	if message[0] == "!":
+			message = message.replace("!","")
+			commands = message.split(" ")
+			self.execute_command(commands)
+
+	def execute_command(self, commands):
+		json_com = json.load(open(commands_path))
+		
+		self.public_msg(str(json_com.get(commands[0]).get(commands[1])))
+
+		#print(json_com['test'])
+	 
 
 # Start main function
 if __name__ == "__main__":
-    main()
+	main()
+
